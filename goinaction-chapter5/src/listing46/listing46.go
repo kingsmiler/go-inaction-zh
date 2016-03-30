@@ -1,21 +1,19 @@
-// Sample program to show how you can't always get the
-// address of a value.
+// 示例演示不能使用指针的场景.
 package main
 
 import "fmt"
 
-// duration is a type with a base type of int.
+// duration 是基本的整形类型.
 type duration int
 
-// format pretty-prints the duration value.
+// 格式化显示 duration 类型的值.
 func (d *duration) pretty() string {
 	return fmt.Sprintf("Duration: %d", *d)
 }
 
-// main is the entry point for the application.
 func main() {
 	duration(42).pretty()
-
-	// ./listing46.go:17: cannot call pointer method on duration(42)
-	// ./listing46.go:17: cannot take the address of duration(42)
+	// 换句话说, 对基本类型的扩展方法, 不要使用指针.
+	// ./listing46.go:15: cannot call pointer method on duration(42)
+	// ./listing46.go:15: cannot take the address of duration(42)
 }
