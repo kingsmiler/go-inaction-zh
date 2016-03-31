@@ -25,6 +25,7 @@ type admin struct {
 func main() {
     // 获取一个子类实例。
     ad := admin{
+        // 作为成员字段，嵌入的类型不能使用指针，这是加上&将报错
         user: user{
             name:  "john smith",
             email: "john@yahoo.com",
@@ -39,4 +40,19 @@ func main() {
     // 子类也可以直接访问
     fmt.Println(ad.name)
     ad.notify()
+
+    // 除了对象初始化时，父类不能使用指针外，
+    // 子类可以随意操作父类的属性与方法。
+    changeName1(ad)
+    fmt.Println("changeName1:", ad.name)
+    changeName2(&ad)
+    fmt.Println("changeName2:", ad.name)
+}
+
+func changeName1(user admin)  {
+    user.name = "robot wang"
+}
+
+func changeName2(user *admin)  {
+    user.name = "robot wang"
 }
