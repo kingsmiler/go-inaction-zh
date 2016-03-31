@@ -1,45 +1,42 @@
-// Sample program to show how to embed a type into another type and
-// the relationship between the inner and outer type.
+// Golang 中的继承实现，将一个类型嵌入到另一类型中。
 package main
 
 import (
-	"fmt"
+    "fmt"
 )
 
-// user defines a user in the program.
+// 定义一个父类
 type user struct {
-	name  string
-	email string
+    name  string
+    email string
 }
 
-// notify implements a method that can be called via
-// a value of type user.
+// 父类的方法
 func (u *user) notify() {
-	fmt.Printf("Sending user email to %s<%s>\n",
-		u.name,
-		u.email)
+    fmt.Printf("Sending user email to %s<%s>\n", u.name, u.email)
 }
 
-// admin represents an admin user with privileges.
+// 定义子类
 type admin struct {
-	user // Embedded Type
-	level string
+    user // Embedded Type
+    level string
 }
 
-// main is the entry point for the application.
 func main() {
-	// Create an admin user.
-	ad := admin{
-		user: user{
-			name:  "john smith",
-			email: "john@yahoo.com",
-		},
-		level: "super",
-	}
+    // 获取一个子类实例。
+    ad := admin{
+        user: user{
+            name:  "john smith",
+            email: "john@yahoo.com",
+        },
+        level: "super",
+    }
 
-	// We can access the inner type's method directly.
-	ad.user.notify()
+    // 以属性的方式来访问父类的属性与方法
+    fmt.Println(ad.user.name)
+    ad.user.notify()
 
-	// The inner type's method is promoted.
-	ad.notify()
+    // 子类也可以直接访问
+    fmt.Println(ad.name)
+    ad.notify()
 }
