@@ -1,55 +1,46 @@
-// Sample program to show how embedded types work with interfaces.
+// 子类使用父类实现的接口示例。
 package main
 
 import (
-	"fmt"
+    "fmt"
 )
 
-// notifier is an interface that defined notification
-// type behavior.
+// 接口
 type notifier interface {
-	notify()
+    notify()
 }
 
-// user defines a user in the program.
+// 父类
 type user struct {
-	name  string
-	email string
+    name, email string
 }
 
-// notify implements a method that can be called via
-// a value of type user.
+// 父类实现接口
 func (u *user) notify() {
-	fmt.Printf("Sending user email to %s<%s>\n",
-		u.name,
-		u.email)
+    fmt.Printf("Sending user email to %s<%s>\n", u.name, u.email)
 }
 
-// admin represents an admin user with privileges.
+// 子类
 type admin struct {
-	user
-	level string
+    user
+    level string
 }
 
-// main is the entry point for the application.
 func main() {
-	// Create an admin user.
-	ad := admin{
-		user: user{
-			name:  "john smith",
-			email: "john@yahoo.com",
-		},
-		level: "super",
-	}
+    // 创建子类实例。
+    ad := admin{
+        user: user{
+            name:  "john smith",
+            email: "john@yahoo.com",
+        },
+        level: "super",
+    }
 
-	// Send the admin user a notification.
-	// The embedded inner type's implementation of the
-	// interface is "promoted" to the outer type.
-	sendNotification(&ad)
+    // 父类的接口实现被子类继承，方法能被直接使用。
+    sendNotification(&ad)
 }
 
-// sendNotification accepts values that implement the notifier
-// interface and sends notifications.
+// 统一的接口调用方法。
 func sendNotification(n notifier) {
-	n.notify()
+    n.notify()
 }
