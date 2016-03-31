@@ -1,6 +1,4 @@
-// Package counters provides alert counter support.
 package counters
 
-// alertCounter is an unexported type that
-// contains an integer counter for alerts.
+// 在包中定义的未暴露出的类型
 type alertCounter int

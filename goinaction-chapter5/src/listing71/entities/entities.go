@@ -1,8 +1,7 @@
-// Package entities contains support for types of
-// people in the system.
+
 package entities
 
-// User defines a user in the program.
+// 暴露的出的类型
 type User struct {
 	Name  string
 	email string

@@ -1,12 +1,9 @@
-// Package counters provides alert counter support.
 package counters
 
-// alertCounter is an unexported type that
-// contains an integer counter for alerts.
+// 私有类型
 type alertCounter int
 
-// New creates and returns values of the unexported
-// type alertCounter.
+// 提供获取私有类型的方法
 func New(value int) alertCounter {
-	return alertCounter(value)
+    return alertCounter(value)
 }
